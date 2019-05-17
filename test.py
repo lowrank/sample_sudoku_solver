@@ -7,6 +7,7 @@ import matplotlib.pylab as plt # for visualization
 
 import time
 import sys
+from multiprocessing import Pool
 from sudoku_solver import solver
 
 # We test the following algoritm on small data set.
@@ -30,21 +31,16 @@ if __name__ == "__main__":
 	else:
 	    samples = range(len(data))
 
+	pool = Pool() 
 
-	for i in range(len(samples)):
-	    quiz = data["quizzes"][samples[i]]
-	    solu = data["solutions"][samples[i]]
+	quizzes = data["quizzes"][samples]
+	solutions = data["solutions"][samples]
 
-	    ans = solver(quiz)
+	res = pool.map(solver, quizzes)
 
-	    if (ans == solu):
-	        corr_cnt += 1
-
-	    if (i+1) % 20 == 0:
-	        end = time.time()
-	        print("Aver Time: {t:6.2f} secs. Success rate: {corr} / {all} ".format(t=(end-start)/(i+1), corr=corr_cnt, all=i+1) )
-
+	corr_cnt = np.sum(1*(res == solutions)) 
 	end = time.time()
+
 	# report:
-	print("Aver Time: {t:6.2f} secs. Success rate: {corr} / {all} ".format(t=(end-start)/(sample_max), corr=corr_cnt, all=sample_max) )
+	print("Aver Time: {t:6.2f} secs. Success rate: {corr} / {all} ".format(t=(end-start)/(len(samples)), corr=corr_cnt, all=len(samples)) )
 
