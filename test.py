@@ -29,7 +29,7 @@ if __name__ == "__main__":
 	if len(data) > sample_max:
 	    samples = np.random.choice(len(data), sample_max)
 	else:
-	    samples = range(len(data))
+	    samples = np.arange(len(data))
 
 	pool = Pool() 
 
