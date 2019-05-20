@@ -36,7 +36,7 @@ if __name__ == "__main__":
 		res = solver(quiz)
 
 		if isinstance(res, np.ndarray):
-			if res.shape=(9,9):
+			if res.shape==(9,9):
 				res = res.flatten()
 			res = ''.join([str(c) for c in res]) 
 
