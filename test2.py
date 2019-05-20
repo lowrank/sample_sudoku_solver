@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
 		res = solver(quiz)
 
-		if isinstance(np.ndarray):
+		if isinstance(res, np.ndarray):
 			res = ''.join([str(c) for c in res]) 
 
 		if res == solu:
